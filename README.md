@@ -1,13 +1,12 @@
 # drupaldrushpolicy
 
+#### TODO clean this up. It's currently written for a personal, specific use.
+
 Allow developers to run limited Drush commands against a Drupal 7 production environment.
 
 ## How to use
 
-create a basic user. With no other configuration applied
-this lets a dev run basic commands and see 90% of what
-needs to be seen. This is read only. It's not possible
-for this user to run any command that could damage the system
+## Create a basic user. 
 adduser drushremoteuser
 
 ## set a password
@@ -24,7 +23,7 @@ usermod -a -G apache drushremoteuser
 
 The user can now run Drush commands against the production server
 
-#
+
 
 BUT THIS IS DANGEROUS - some Drush commands can nuke the system
 
