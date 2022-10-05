@@ -7,7 +7,9 @@ Allow developers to run limited Drush commands against a Drupal 7 production env
 ## How to use
 
 ## Create a basic user. 
+```
 adduser drushremoteuser
+```
 
 ## set a password
 
@@ -19,27 +21,33 @@ But Devs still need limited Drush access to the system
 This let's the user run any script that the
 Apache web server can run
 
+```
 usermod -a -G apache drushremoteuser
+```
 
 The user can now run Drush commands against the production server
 
 
 
-BUT THIS IS DANGEROUS - some Drush commands can nuke the system
+BUT THIS IS DANGEROUS - some Drush commands can nuke the system.
+You don't even want your root user or sysadmin to be able to run
+commands like 'sql-drop.' I've seen it happen - sql-dump, sql-drop -
+muscle memory is a helluva thing.
 
-## Copy the referenced PHP code into the new user's home directory
+
+## copy policy.drush.inc to drushremoteuser $HOME directory under ~/.drush/
 
 This DENIES execution to all Drush commands initially, and then
 ALLOWS execution based on inclusion in a white list
-
-## copy paste policy.drush.inc to drushremoteuser directory under ~/.drush/
 
 Copy and paste policy.drush.inc into the home directory of 'drushremoteuser' 
 under ~/.drushrc. IMPORTANT: Set the ownership and permissions so the
 user can read it, but not edit it.
 
-- chown root:root ~/.drush/policy.drush.inc
-- chmod 440 ~/.drush/policy.drush.inc
+```
+chown root:root ~/.drush/policy.drush.inc
+chmod 440 ~/.drush/policy.drush.inc
+```
 
 ## Add commands to the whitelist as needed. All other commands will be blocked
 
